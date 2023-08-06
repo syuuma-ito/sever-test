@@ -28,7 +28,7 @@ io.on("connect", (socket) => {
     });
 
     socket.on("angles", (angles) => {
-        log.debug("on_angle", angles);
+        // log.debug("on_angle", angles);
         io.emit("angles", angles);
     });
 });
