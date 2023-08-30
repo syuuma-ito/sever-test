@@ -31,6 +31,10 @@ io.on("connect", (socket) => {
         // log.debug("on_angle", angles);
         io.emit("angles", angles);
     });
+    socket.on("shoot", (data) => {
+        log.debug("shoot", data);
+        io.emit("shoot", data);
+    });
 });
 
 log.info("=== sever start ===");
