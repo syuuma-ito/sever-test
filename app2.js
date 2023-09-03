@@ -41,7 +41,7 @@ httpServer.on("upgrade", (request, socket, head) => {
 
 function webSocketBroadcast(data) {
     wss.clients.forEach((client) => {
-        if (client.readyState === WebSocket.OPEN) {
+        if (client.readyState === 1) {
             client.send(data);
         }
     });
