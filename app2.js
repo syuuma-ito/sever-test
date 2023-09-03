@@ -39,10 +39,11 @@ httpServer.on("upgrade", (request, socket, head) => {
     });
 });
 
-function webSocketBroadcast(data) {
+function webSocketBroadcast(evetName, data) {
+    const sendMsg = JSON.stringify({ event: evetName, data: data });
     wss.clients.forEach((client) => {
         if (client.readyState === 1) {
-            client.send(data);
+            client.send(sendMsg);
         }
     });
 }
@@ -55,13 +56,14 @@ io.on("connect", (socket) => {
     });
 
     socket.on("angles", (angles) => {
-        // log.debug("on_angle", angles);
-        webSocketBroadcast(JSON.stringify(angles));
+        // TODO sessionIDで現在のユーザーかどうかを判定する
+        webSocketBroadcast("angles", angles);
         io.emit("angles", angles);
     });
     socket.on("shoot", (data) => {
+        // TODO sessionIDで現在のユーザーかどうかを判定する
         log.debug("shoot", data);
-        webSocketBroadcast(JSON.stringify(data));
+        webSocketBroadcast("shoot", data);
         io.emit("shoot", data);
     });
 });
