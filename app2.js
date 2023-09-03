@@ -39,8 +39,8 @@ httpServer.on("upgrade", (request, socket, head) => {
     });
 });
 
-function webSocketBroadcast(event_name, data) {
-    const sendMsg = JSON.stringify({ event_name: event_name, data: data });
+function webSocketBroadcast(data) {
+    const sendMsg = JSON.stringify(data);
     wss.clients.forEach((client) => {
         if (client.readyState === 1) {
             client.send(sendMsg);
@@ -57,13 +57,13 @@ io.on("connect", (socket) => {
 
     socket.on("angles", (angles) => {
         // TODO sessionIDで現在のユーザーかどうかを判定する
-        webSocketBroadcast("angles", angles);
+        webSocketBroadcast({ event_name: "angles", x: angles.x, y: angles.y, z: angles.z });
         io.emit("angles", angles);
     });
     socket.on("shoot", (data) => {
         // TODO sessionIDで現在のユーザーかどうかを判定する
         log.debug("shoot", data);
-        webSocketBroadcast("shoot", data);
+        webSocketBroadcast({ event_name: "shoot", x: data.x, y: data.y, z: data.z });
         io.emit("shoot", data);
     });
 });
