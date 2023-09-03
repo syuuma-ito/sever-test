@@ -40,7 +40,7 @@ httpServer.on("upgrade", (request, socket, head) => {
 });
 
 function webSocketBroadcast(evetName, data) {
-    const sendMsg = JSON.stringify({ event: evetName, data: data });
+    const sendMsg = JSON.stringify({ event_name: evetName, data: data });
     wss.clients.forEach((client) => {
         if (client.readyState === 1) {
             client.send(sendMsg);
