@@ -59,6 +59,7 @@ io.on("connect", (socket) => {
         // TODO sessionIDで現在のユーザーかどうかを判定する
         webSocketBroadcast({ event_name: "angles", x: angles.x, y: angles.y, z: angles.z });
         io.emit("angles", angles);
+        log.debug("angles", data);
     });
     socket.on("shoot", (data) => {
         // TODO sessionIDで現在のユーザーかどうかを判定する
