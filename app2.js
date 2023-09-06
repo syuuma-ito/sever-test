@@ -34,8 +34,8 @@ io.on("connect", (socket) => {
     });
     socket.on("shoot", (data) => {
         // TODO sessionIDで現在のユーザーかどうかを判定する
-        log.debug("shoot", data);
         io.emit("shoot", data);
+        log.debug("shoot", data);
     });
 });
 
