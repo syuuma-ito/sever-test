@@ -37,6 +37,14 @@ io.on("connect", (socket) => {
         io.emit("shoot", data);
         log.debug("shoot", data);
     });
+    socket.on("hit", (data) => {
+        io.emit("hit", data);
+        log.debug("hit", data);
+    });
+    socket.on("score_update", (data) => {
+        io.emit("score_update", data);
+        log.debug("score_update", data);
+    });
 });
 
 log.info("=== sever start ===");
