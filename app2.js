@@ -31,10 +31,10 @@ io.on("connect", (socket) => {
     });
 
     socket.on("init", (data) => {
-        log.info("init : " + socket.id);
-        sessionID = data.sessionID;
-        log.debug("sessionID : " + sessionID);
         io.emit("init", data);
+        log.info("init : " + socket.id);
+        sessionID = data.sessionId;
+        log.debug("sessionID : " + sessionID);
     });
 
     socket.on("start", (data) => {
