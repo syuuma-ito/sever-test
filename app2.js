@@ -38,7 +38,7 @@ io.on("connect", (socket) => {
     });
 
     socket.on("start", (data) => {
-        if (data.sessionID !== sessionID) {
+        if (data.sessionId !== sessionID) {
             log.error("sessionID is not match");
             return;
         }
@@ -47,22 +47,20 @@ io.on("connect", (socket) => {
     });
 
     socket.on("angles", (angles) => {
-        if (sessionID === "") {
-            log.error("sessionID is empty");
+        if (angles.sessionId === "") {
             return;
         }
-        if (angles.sessionID !== sessionID) {
-            log.error("sessionID is not match");
+        if (angles.sessionId !== sessionID) {
             return;
         }
         io.volatile.emit("angles", angles);
     });
     socket.on("shoot", (data) => {
-        if (sessionID === "") {
+        if (data.sessionId === "") {
             log.error("sessionID is empty");
             return;
         }
-        if (angles.sessionID !== sessionID) {
+        if (data.sessionId !== sessionID) {
             log.error("sessionID is not match");
             return;
         }
