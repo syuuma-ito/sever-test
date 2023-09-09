@@ -47,11 +47,25 @@ io.on("connect", (socket) => {
     });
 
     socket.on("angles", (angles) => {
-        // TODO sessionIDで現在のユーザーかどうかを判定する
+        if (sessionID === "") {
+            log.error("sessionID is empty");
+            return;
+        }
+        if (angles.sessionID !== sessionID) {
+            log.error("sessionID is not match");
+            return;
+        }
         io.volatile.emit("angles", angles);
     });
     socket.on("shoot", (data) => {
-        // TODO sessionIDで現在のユーザーかどうかを判定する
+        if (sessionID === "") {
+            log.error("sessionID is empty");
+            return;
+        }
+        if (angles.sessionID !== sessionID) {
+            log.error("sessionID is not match");
+            return;
+        }
         io.emit("shoot", data);
         log.debug("shoot", data);
     });
