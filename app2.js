@@ -75,6 +75,18 @@ io.on("connect", (socket) => {
         io.emit("score_update", data);
         log.debug("score_update", data);
     });
+    socket.on("user_join", (data) => {
+        if (data.sessionId === "") {
+            log.error("sessionID is empty");
+            return;
+        }
+        if (data.sessionId !== sessionID) {
+            log.error("sessionID is not match");
+            return;
+        }
+        io.emit("user_join", data);
+        log.debug("user_join", data);
+    });
 });
 
 log.info("=== sever start ===");
